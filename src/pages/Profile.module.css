@@ -1,0 +1,24 @@
+.header {
+    background-color: white;
+    color: black;
+    height: 20px;
+    
+    
+}
+
+.span {
+    margin-left: 440px;
+    text-align: right;
+    border: 1px solid red;
+    height: 20px;
+    background-color: cyan;
+}
+.form {
+    border: 2px solid blue;
+    text-align: center;
+    margin-top: 10rem;
+}
+
+.btn1 {
+    margin-left: 10px;
+}
