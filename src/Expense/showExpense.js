@@ -1,34 +1,43 @@
-import axios from "axios";
+// import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import ExpenseItem from "./ExpenseItem";
 
-const ShowExpense = () => {
-  
-  const [check, setcheck] = useState([]);
+const ShowExpense = (props) => {
+  const checkExpense = useSelector((state) => state.expense.expenses);
+  // console.log("Checking props", props);
 
-  useEffect(() => {
-    axios
-      .get(
-        "https://react-expense-c9f7d-default-rtdb.firebaseio.com/expenses.json"
-      )
-      .then((res) => {
-        console.log(res.data);
-        setcheck(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+  // const [check, setcheck] = useState([]);
 
-  console.log("checking check",typeof check);
-  const result = Object.values(check);
-  console.log("checking result",typeof result);
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       "https://react-expense-c9f7d-default-rtdb.firebaseio.com/expenses.json"
+  //     )
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setcheck(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
+
+  // console.log("checking check", typeof check);
+  // console.log(check);
+  // const result = Object.values(check);
+  // console.log("checking result", typeof result);
+
+  // if (result == null) {
+  //   return <h1>Please add your expense</h1>;
+  // }
   return (
     <ul>
-      {result.map((item) => (
+      {checkExpense.map((item) => (
         <ExpenseItem
           item={{
             id: item.id,
+
             amount: item.amount,
             description: item.description,
             category: item.category,
@@ -36,7 +45,6 @@ const ShowExpense = () => {
         />
       ))}
     </ul>
-    
   );
 };
 
