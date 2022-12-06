@@ -13,7 +13,7 @@ const Expenses = (props) => {
   const categoryInputRef = useRef();
   const dispatch = useDispatch();
   const totalPrice = useSelector((state) => state.expense.totalAmount);
-  const darkMode = useSelector((state) => state.expense.darkMode);
+  const darkMode = useSelector((state) => state.theme.darkMode);
   const [premium, setPremium] = useState(false);
   const [download, setdownload] = useState(false);
 
@@ -46,6 +46,16 @@ const Expenses = (props) => {
     ).then(async (res) => {
       const data = await res.json();
       console.log(data.name);
+      fetch(
+        `https://react-expense-c9f7d-default-rtdb.firebaseio.com/expenses/${data.name}.json`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            ...obj,
+            id: data.name,
+          }),
+        }
+      )
 
       dispatch(
         expenseActions.addExpense({
@@ -56,6 +66,7 @@ const Expenses = (props) => {
         })
       );
     });
+    
     if (totalPrice > 10000) {
       console.log("Premium Activated");
       setPremium(true);
@@ -77,7 +88,7 @@ const Expenses = (props) => {
       <h1> Track Your Expenses</h1>
       {download && <h3>premium feature activate</h3>}
       {download && (
-        <button onClick={darkNormalHandler}>
+        <button  className={`btn ${darkMode ? "btn-dark" : "btn-light"}`}  onClick={darkNormalHandler}>
           {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
         </button>
       )}

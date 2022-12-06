@@ -76,7 +76,7 @@ const AuthForm = () => {
 
   return (
     <section className={classes.auth}>
-      {loginState && <Redirect to="/expense" />}
+      {loginState && <Redirect to="/Welcome" />}
       <h1>{isLogin ? "Login" : "Sign Up"}</h1>
       <form onSubmit={submitHandler}>
         <div className={classes.control}>

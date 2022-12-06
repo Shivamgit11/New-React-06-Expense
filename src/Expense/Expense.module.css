@@ -1,4 +1,12 @@
-.list{
-    margin-left: 10px;
-    margin-right: 10px;
+.list {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.btn dark {
+  background-color: black;
+}
+
+.btn light {
+  background-color: black;
 }
